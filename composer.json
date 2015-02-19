@@ -1,0 +1,14 @@
+{
+  "name": "kandelio/policies",
+  "type": "typo3-cms-extension",
+  "description": "",
+  "require": {
+    "symfony/expression-language": "2.6.*",
+    "typo3/cms-core": ">=6.2.0,<8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Kandelio\\Policies\\": "Classes"
+    }
+  }
+}
