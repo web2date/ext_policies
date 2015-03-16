@@ -66,7 +66,7 @@ class PolicyEnforcementAspect {
 	 */
 	public function initializeObject() {
 		$settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-		$this->policies = $this->typoScriptService->convertTypoScriptArrayToPlainArray($settings['security.']['policies.']);
+		$this->policies = is_array($settings['security.']) ? $this->typoScriptService->convertTypoScriptArrayToPlainArray($settings['security.']['policies.']) : array();
 	}
 
 	/**
