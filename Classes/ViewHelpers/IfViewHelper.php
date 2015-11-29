@@ -1,5 +1,5 @@
 <?php
-namespace KandelIo\Policies\Aspect;
+namespace KandelIo\Policies\ViewHelpers;
 
 /***************************************************************
  *  Copyright notice
@@ -30,13 +30,7 @@ namespace KandelIo\Policies\Aspect;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 
-class PolicyEnforcementAspect {
-
-	/**
-	 * @inject
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-	 */
-	protected $configurationManager;
+class IfViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 
 	/**
 	 * @inject
@@ -45,37 +39,18 @@ class PolicyEnforcementAspect {
 	protected $evaluationService;
 
 	/**
-	 * @inject
-	 * @var \TYPO3\CMS\Extbase\Service\TypoScriptService
-	 */
-	protected $typoScriptService;
-
-	/**
-	 * @var array
-	 */
-	protected $policies;
-
-	/**
+	 * renders <f:then> child if $condition is true, otherwise renders <f:else> child.
 	 *
+	 * @param string $evaluationExpression View helper condition
+	 * @param array $arguments
+	 * @return string the rendered string
+	 * @api
 	 */
-	public function initializeObject() {
-		$settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-		$this->policies = is_array($settings['security.']) ? $this->typoScriptService->convertTypoScriptArrayToPlainArray($settings['security.']['policies.']) : array();
-	}
-
-	/**
-	 * Enforces policies as defined in TypoScript
-	 *
-	 * @param $controllerName
-	 * @param $actionName
-	 * @param $preparedArguments
-	 * @throws StopActionException
-	 */
-	public function enforcePolicy($controllerName, $actionName, $preparedArguments) {
-		if (isset($this->policies[$controllerName][$actionName])) {
-			if (!$this->evaluationService->evaluate($this->policies[$controllerName][$actionName], $preparedArguments)) {
-				throw new StopActionException();
-			}
+	public function render($evaluationExpression, $arguments = array()) {
+		if ($this->evaluationService->evaluate($evaluationExpression, $arguments)) {
+			return $this->renderThenChild();
+		} else {
+			return $this->renderElseChild();
 		}
 	}
 
