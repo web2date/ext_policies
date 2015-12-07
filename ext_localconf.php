@@ -5,7 +5,7 @@ $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TY
 $signalSlotDispatcher->connect(
 	'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ActionController',
 	'beforeCallActionMethod',
-	'Kandelio\\Policies\\Aspect\\PolicyEnforcementAspect',
+	'KandelIo\\Policies\\Aspect\\PolicyEnforcementAspect',
 	'enforcePolicy'
 );
 
