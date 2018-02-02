@@ -31,56 +31,51 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Finder\Expression\Expression;
 use TYPO3\CMS\Core\SingletonInterface;
 
-class ExpressionLanguageUtility implements SingletonInterface
-{
+class ExpressionLanguageUtility implements SingletonInterface {
 
-    /**
-     * @var ExpressionLanguage
-     */
-    protected $expressionLanguage;
+	/**
+	 * @var ExpressionLanguage
+	 */
+	protected $expressionLanguage;
 
-    public function __construct()
-    {
-        $this->expressionLanguage = new ExpressionLanguage();
-    }
+	public function __construct() {
+		$this->expressionLanguage = new ExpressionLanguage();
+	}
 
-    /**
-     * Compiles an expression source code.
-     *
-     * @param Expression|string $expression The expression to compile
-     * @param array $names An array of valid names
-     *
-     * @return string The compiled PHP source code
-     */
-    public function compile($expression, $names = array())
-    {
-        return $this->expressionLanguage->compile($expression, $names);
-    }
+	/**
+	 * Compiles an expression source code.
+	 *
+	 * @param Expression|string $expression The expression to compile
+	 * @param array $names An array of valid names
+	 *
+	 * @return string The compiled PHP source code
+	 */
+	public function compile($expression, $names = array()) {
+		return $this->expressionLanguage->compile($expression, $names);
+	}
 
-    /**
-     * Evaluate an expression.
-     *
-     * @param Expression|string $expression The expression to compile
-     * @param array $values An array of values
-     *
-     * @return string The result of the evaluation of the expression
-     */
-    public function evaluate($expression, $values = array())
-    {
-        return $this->expressionLanguage->evaluate($expression, $values);
-    }
+	/**
+	 * Evaluate an expression.
+	 *
+	 * @param Expression|string $expression The expression to compile
+	 * @param array $values An array of values
+	 *
+	 * @return string The result of the evaluation of the expression
+	 */
+	public function evaluate($expression, $values = array()) {
+		return $this->expressionLanguage->evaluate($expression, $values);
+	}
 
-    /**
-     * Registers a function.
-     *
-     * @param string $name The function name
-     * @param callable $compiler A callable able to compile the function
-     * @param callable $evaluator A callable able to evaluate the function
-     *
-     * @see ExpressionFunction
-     */
-    public function register($name, $compiler, $evaluator)
-    {
-        $this->expressionLanguage->register($name, $compiler, $evaluator);
-    }
+	/**
+	 * Registers a function.
+	 *
+	 * @param string $name The function name
+	 * @param callable $compiler A callable able to compile the function
+	 * @param callable $evaluator A callable able to evaluate the function
+	 *
+	 * @see ExpressionFunction
+	 */
+	public function register($name, $compiler, $evaluator) {
+		$this->expressionLanguage->register($name, $compiler, $evaluator);
+	}
 }

@@ -30,30 +30,28 @@ namespace KandelIo\Policies\ViewHelpers;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 
-class IfViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
-{
+class IfViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 
-    /**
-     * @inject
-     * @var \KandelIo\Policies\Service\EvaluationService
-     */
-    protected $evaluationService;
+	/**
+	 * @inject
+	 * @var \KandelIo\Policies\Service\EvaluationService
+	 */
+	protected $evaluationService;
 
-    /**
-     * renders <f:then> child if $condition is true, otherwise renders <f:else> child.
-     *
-     * @param string $evaluationExpression View helper condition
-     * @param array $arguments
-     * @return string the rendered string
-     * @api
-     */
-    public function render($evaluationExpression, $arguments = array())
-    {
-        if ($this->evaluationService->evaluate($evaluationExpression, $arguments)) {
-            return $this->renderThenChild();
-        } else {
-            return $this->renderElseChild();
-        }
-    }
+	/**
+	 * renders <f:then> child if $condition is true, otherwise renders <f:else> child.
+	 *
+	 * @param string $evaluationExpression View helper condition
+	 * @param array $arguments
+	 * @return string the rendered string
+	 * @api
+	 */
+	public function render($evaluationExpression, $arguments = array()) {
+		if ($this->evaluationService->evaluate($evaluationExpression, $arguments)) {
+			return $this->renderThenChild();
+		} else {
+			return $this->renderElseChild();
+		}
+	}
 
 }
