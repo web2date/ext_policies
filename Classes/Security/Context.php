@@ -35,28 +35,28 @@ use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
  *
  * @package Kandelio\Policies\Security
  */
-class Context implements SingletonInterface {
+class Context implements SingletonInterface
+{
 
-	/**
-	 * @inject
-	 * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
-	 */
-	protected $frontendUserRepository;
+    /**
+     * @inject
+     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
+     */
+    protected $frontendUserRepository;
 
-	/**
-	 * @var FrontendUser
-	 */
-	protected $user;
+    /**
+     * @var FrontendUser
+     */
+    protected $user;
 
-	/**
-	 * @return null|FrontendUser
-	 */
-	public function getUser() {
-		if ($this->user === NULL && $GLOBALS['TSFE']->fe_user->user['uid']) {
-			$this->user = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-		}
-
-		return $this->user;
-	}
-
+    /**
+     * @return null|FrontendUser
+     */
+    public function getUser()
+    {
+        if ($this->user === null && $GLOBALS['TSFE']->fe_user->user['uid']) {
+            $this->user = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+        }
+        return $this->user;
+    }
 }

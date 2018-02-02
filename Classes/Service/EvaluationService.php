@@ -27,23 +27,25 @@ namespace KandelIo\Policies\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class EvaluationService {
+class EvaluationService
+{
 
-	/**
-	 * @inject
-	 * @var \KandelIo\Policies\Utility\ExpressionLanguageUtility
-	 */
-	protected $expressionLanguage;
+    /**
+     * @inject
+     * @var \KandelIo\Policies\Utility\ExpressionLanguageUtility
+     */
+    protected $expressionLanguage;
 
-	/**
-	 * @inject
-	 * @var \KandelIo\Policies\Security\Context
-	 */
-	protected $securityContext;
+    /**
+     * @inject
+     * @var \KandelIo\Policies\Security\Context
+     */
+    protected $securityContext;
 
-	public function evaluate($expression, $arguments) {
-		$preparedArguments = array('securityContext' => $this->securityContext);
-		return $this->expressionLanguage->evaluate($expression, array_merge($arguments, $preparedArguments));
-	}
+    public function evaluate($expression, $arguments)
+    {
+        $preparedArguments = array('securityContext' => $this->securityContext);
+        return $this->expressionLanguage->evaluate($expression, array_merge($arguments, $preparedArguments));
+    }
 
 }
